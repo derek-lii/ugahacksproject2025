@@ -1,3 +1,29 @@
 {
-    "choices": ["Apple", "Banana", "Orange", "Grapes", "Pineapple", "Mango"]
+    "choices": [
+      { "id": 1, "name": "Tomatoes (1 lb)", "price": 2.07 },
+      { "id": 2, "name": "Bananas (1 lb)", "price": 0.62 },
+      { "id": 3, "name": "Oranges (1 lb)", "price": 1.56 },
+      { "id": 4, "name": "Chicken (1 lb)", "price": 2.06 },
+      { "id": 5, "name": "Eggs (1 dozen)", "price": 4.17 },
+      { "id": 6, "name": "Milk (1 gallon)", "price": 4.14 },
+      { "id": 7, "name": "Ground Beef (1 lb)", "price": 5.58},
+      { "id": 8, "name": "Apples (1 lb)", "price": 1.38 },
+      { "id": 9, "name": "Carrots (1 lb)", "price": 1.08 },
+      { "id": 10, "name": "Iceberg Lettuce", "price": 1.84 },
+      { "id": 11, "name": "Potatoes (1 lb)", "price": 0.88 },
+      { "id": 12, "name": "Ground Sausage (1 lb)", "price": 3.57 },
+      { "id": 13, "name": "Shredded Cheddar Cheese (1 lb)", "price": 4.48 },
+      { "id": 14, "name": "Butter (1 lb)", "price": 3.96 },
+      { "id": 15, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 16, "name": "Rice (1 lb)", "price": 0.89 },
+      { "id": 17, "name": "Flour (1 lb)", "price": 0.66 },
+      { "id": 18, "name": "Ground Coffee (1 lb)", "price": 7.41 },
+      { "id": 19, "name": "Pasta (1 lb)", "price": 0.98 },
+      { "id": 20, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 21, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 22, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 23, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 24, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 },
+      { "id": 25, "name": "Bread (1 loaf, 20 oz)", "price": 1.42 }
+    ]
   }
