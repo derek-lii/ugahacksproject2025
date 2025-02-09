@@ -5,7 +5,9 @@ import choicesList from "./choices.json";
 
 
 function Grocery({ label, onGroceryClick }) {
-  return <button className="grocery" onClick={onGroceryClick}>{label}</button>;
+  return <button className = {styles.grocery} 
+    onClick = {onGroceryClick}> {label} 
+    </button>;
 }
 
 export default function Home() {
@@ -13,6 +15,9 @@ export default function Home() {
   const [currentItem, setCurrentItem] = useState(null);
   const [nextItem, setNextItem] = useState(null);
   const [score, setScore] = useState(0); 
+  const [revealedPrice, setRevealedPrice] = useState(null);
+  const [showPrice, setShowPrice] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
 
   return (
     <div className = {styles.page}>
@@ -20,26 +25,38 @@ export default function Home() {
       {gameStarted ? (
           <div className = "Groceries">
             <div>
-              <h2>Current Item: {currentItem?.name} - ${currentItem?.price}</h2>
-              <p>Is the next item higher or lower in price?</p>
-              <h2>Next Item: {nextItem?.name}</h2>
+            <h2>{currentItem?.name}</h2>
+            <h3>${currentItem?.price}</h3>
+            </div>
+
+            <h1 style = {{margin: "100px"}}>Is the bottom item higher or lower in price?</h1>
+
+            <h2>{nextItem?.name}</h2> 
+            {showPrice && 
+              <h3> ${revealedPrice} </h3>
+            }
+
+            {gameEnded && 
+              <h2>You lost! Your final score was {score}</h2>  
+            }
+           <div className = {styles.buttonContainer}>
               <Grocery 
+                className = {styles.groceryHigher} 
                 label="Higher" 
-                onGroceryClick={() => handleGroceryClick(true)} 
+                onGroceryClick = {() => handleGroceryClick(true)} 
               />
               <Grocery 
+                className = {styles.groceryLower} 
                 label="Lower" 
-                onGroceryClick={() => handleGroceryClick(false)} 
+                onGroceryClick = {() => handleGroceryClick(false)} 
               />
             </div>
-            <div>
-              <p>Score: {score}</p>
-            </div>
-          </div>
+            <h1 style = {{position: "absolute", bottom: "0"}}>Score: {score}</h1>
+        </div>
         ) : (
           <div>
-            <h1>The Money Game</h1>
-           <button className = {styles.start} onClick={handleStartClick}>Start</button>
+            <h1 main>The Grocery Money Game</h1>
+            <button className = {styles.start} onClick = {handleStartClick}>Start</button>
           </div>
         )}
       </main>
@@ -60,25 +77,32 @@ export default function Home() {
 
   function handleGroceryClick(isHigher) {
     const correctGuess = (isHigher && nextItem.price > currentItem.price) || (!isHigher && nextItem.price < currentItem.price);
-    //TBD: show price of next item, wait, then give an alert
+
+    setRevealedPrice(nextItem.price); 
+    setShowPrice(true);
     if (correctGuess) {
       setScore(prevScore => prevScore + 1);
-      alert('Correct!');
+      setTimeout(() => {
+        const newCurrentItem = nextItem;
+        let newNextItem = getRandomItem();
+
+        while (newCurrentItem.id === newNextItem.id) {
+          newNextItem = getRandomItem();
+        }
+
+        setCurrentItem(newCurrentItem);
+        setNextItem(newNextItem);
+        setShowPrice(false);
+      }, 1500); // Adjust delay as needed
     } else {
-      alert('Wrong! Game Over');
-      setGameStarted(false); // End the game
+      setGameEnded(true);
+      setTimeout(() => {
+        setGameStarted(false);
+        setScore(0);
+        setGameEnded(false);
+        setShowPrice(false);
+      }, 3000);
     }
-
-    const newCurrentItem = nextItem;
-    let newNextItem = getRandomItem();
-
-    //maybe handle this better - implement check for when no items are left
-    while (newCurrentItem.id === newNextItem.id) {
-      newNextItem = getRandomItem();
-    }
-
-    setCurrentItem(newCurrentItem);
-    setNextItem(newNextItem);
   }
   
   function getRandomItem() {
